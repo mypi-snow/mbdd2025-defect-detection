@@ -1,0 +1,7 @@
+reference_class,crack,leakage,abscission,corrosion,bulge,background
+crack,241,0,0,0,0,1920
+leakage,0,137,0,0,0,756
+abscission,0,0,327,0,0,2469
+corrosion,0,0,0,6,0,1116
+bulge,1,0,0,0,51,201
+background,149,28,68,3,5,0

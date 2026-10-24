@@ -1,0 +1,8 @@
+{
+  "screen": "64-bit dHash Hamming <=4 and normalized 32x18 grayscale thumbnail mean difference <=0.06",
+  "retained_cross_split_candidate_pairs": 7,
+  "visually_reviewed_different_scene_pairs": 7,
+  "unresolved_pairs": 0,
+  "adjacent_id_cross_split_pairs": 0,
+  "source_candidate_pairs_file": "dataset_audit/all_near_duplicate_candidates_wide.csv"
+}

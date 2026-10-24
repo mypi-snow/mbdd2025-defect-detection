@@ -1,0 +1,22 @@
+{
+  "model": "fasterrcnn",
+  "seed": 42,
+  "epochs": 100,
+  "batch_size": 1,
+  "image_size": 640,
+  "learning_rate": 0.0025,
+  "augmentation": "none",
+  "pretraining": "COCO",
+  "weights_path": "weights/fasterrcnn_coco_v2.pt",
+  "manifest_sha256": "6f4ab573cd61f1a28120120b10126feda16635e98a0d7db22270dcaba82007c1",
+  "train_images": 8418,
+  "validation_images": 1804,
+  "torch": "2.7.1+cu118",
+  "torchvision": "0.22.1+cu118",
+  "gpu": "Quadro RTX 6000",
+  "gpu_memory_gb": 23.46,
+  "pbs_requested_mem": null,
+  "checkpoint_every_minutes": 15.0,
+  "checkpoint_every_batches": 1000,
+  "parameter_count": 43276653
+}

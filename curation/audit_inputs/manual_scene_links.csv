@@ -1,0 +1,10 @@
+ImageID_A,ImageID_B,Decision,Reason
+Hefei3987,Hefei4288,same_scene,Visual review shows the same wall and bulge from a slightly shifted view
+Hefei14399,Hefei14414,same_scene,Visual review shows the same courtyard and column
+Hefei10984,Hefei7913,different_scene,Visual review shows different walls and defect types
+Hefei10985,Hefei7913,different_scene,Visual review shows different walls and defect types
+Hefei10022,Hefei9987,different_scene,Visual review shows different wall features and framing
+Hefei10432,Hefei9987,different_scene,Visual review shows different cracks and wall layout
+Hefei10433,Hefei9987,different_scene,Visual review shows different cracks and wall layout
+Hefei10434,Hefei9987,different_scene,Visual review shows different cracks and wall layout
+Hefei13291,Hefei9987,different_scene,Visual review shows different wall damage and material

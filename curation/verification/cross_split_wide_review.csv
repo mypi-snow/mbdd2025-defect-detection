@@ -1,0 +1,8 @@
+ImageID_A,Split_A,GroupID_A,ImageID_B,Split_B,GroupID_B,DHashDistance,ThumbnailDifference,CurrentSplit_A,CurrentSplit_B,ReviewDecision,ReviewReason
+Hefei10022,train,g000011,Hefei9987,train,g003766,4,0.046215,train,val,different_scene,Visual review shows different wall features and framing
+Hefei10432,val,g000156,Hefei9987,train,g003766,4,0.047801,train,val,different_scene,Visual review shows different cracks and wall layout
+Hefei10433,test,g000157,Hefei9987,train,g003766,4,0.049653,train,val,different_scene,Visual review shows different cracks and wall layout
+Hefei13291,train,g001263,Hefei9987,train,g003766,4,0.051981,train,val,different_scene,Visual review shows different wall damage and material
+Hefei10434,test,g000157,Hefei9987,train,g003766,4,0.053173,train,val,different_scene,Visual review shows different cracks and wall layout
+Hefei10984,train,g000470,Hefei7913,val,g003468,4,0.05463,train,test,different_scene,Visual review shows different walls and defect types
+Hefei10985,train,g000471,Hefei7913,val,g003468,4,0.055018,train,test,different_scene,Visual review shows different walls and defect types

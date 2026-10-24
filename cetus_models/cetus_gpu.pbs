@@ -1,0 +1,98 @@
+#!/usr/bin/env bash
+#PBS -N mbdd-detector
+#PBS -q small_gpuq
+#PBS -l select=1:ncpus=6:mem=32gb:ngpus=1
+#PBS -l walltime=48:00:00
+#PBS -m abe
+#PBS -j oe
+
+set -euo pipefail
+cd "${PBS_O_WORKDIR:?Submit from the project directory}"
+
+MODEL="${MODEL:-fasterrcnn}"
+MODE="${MODE:-smoke}"
+SEED="${SEED:-42}"
+RUN_NAME="${RUN_NAME:-${MODEL}_curated_seed${SEED}}"
+DATA_ROOT="${DATA_ROOT:-$PWD/MBDD2025_curated_v1}"
+MANIFEST_PATH="${MANIFEST_PATH:-$DATA_ROOT/split_manifest.csv}"
+PYTHON_BIN="${PYTHON_BIN:-$PWD/.venv/bin/python}"
+OUTPUT_ROOT="${OUTPUT_ROOT:-$PWD/runs}"
+WEIGHTS_PATH="${WEIGHTS_PATH:-$PWD/weights/${MODEL}_coco_v2.pt}"
+OUT="$OUTPUT_ROOT/$RUN_NAME"
+export TORCH_HOME="${TORCH_HOME:-$PWD/.torch_cache}"
+
+case "$MODEL" in fasterrcnn|retinanet) ;; *) echo "Invalid MODEL: $MODEL" >&2; exit 2 ;; esac
+case "$MODE" in smoke|train|test) ;; *) echo "Invalid MODE: $MODE" >&2; exit 2 ;; esac
+[[ -x "$PYTHON_BIN" ]] || { echo "Missing environment: $PYTHON_BIN; run prepare_cetus.sh" >&2; exit 2; }
+[[ -d "$DATA_ROOT/JPEGImages" && -d "$DATA_ROOT/Annotations" && -f "$MANIFEST_PATH" ]] || {
+  echo "Curated dataset or manifest missing under $DATA_ROOT" >&2; exit 2;
+}
+if [[ "$MODE" == train && ! -f "$WEIGHTS_PATH" && ! -f "$OUT/last.pt" ]]; then
+  echo "COCO weights absent: $WEIGHTS_PATH; run prepare_cetus.sh first" >&2; exit 2
+fi
+if [[ "$MODE" == test && ! -f "$OUT/best.pt" ]]; then
+  echo "Selected checkpoint absent: $OUT/best.pt" >&2; exit 2
+fi
+
+echo "START $(date -Is) job=${PBS_JOBID:-unknown} host=$(hostname) mode=$MODE model=$MODEL run=$RUN_NAME"
+echo "PBS resource request: ${PBS_RESOURCE_LIST:-see qstat -fx $PBS_JOBID}"
+"$PYTHON_BIN" -c 'import torch, torchvision, pycocotools; assert torch.cuda.is_available(), "CUDA unavailable"; print("GPU:", torch.cuda.get_device_name(0), "VRAM GiB:", round(torch.cuda.get_device_properties(0).total_memory/1024**3,2), "torch:", torch.__version__, "torchvision:", torchvision.__version__, flush=True)'
+
+# Checkpoints remain on shared storage, not scratch, so a walltime kill does not discard progress.
+mkdir -p "/scratch/$USER"
+SCRATCH_JOB="$(mktemp -d "/scratch/$USER/mbdd_${PBS_JOBID%%.*}.XXXXXX")"
+CHILD_PID=""
+cleanup() {
+  code=$?
+  trap - EXIT
+  echo "END $(date -Is) job=${PBS_JOBID:-unknown} exit=$code"
+  rm -rf -- "$SCRATCH_JOB"
+  exit "$code"
+}
+on_term() {
+  echo "TERM $(date -Is): forwarding to trainer for checkpoint"
+  if [[ -n "$CHILD_PID" ]]; then
+    kill -TERM "$CHILD_PID" 2>/dev/null || true
+    wait "$CHILD_PID" || true
+  fi
+  exit 143
+}
+trap cleanup EXIT
+trap on_term TERM INT
+mkdir -p "$SCRATCH_JOB/data/JPEGImages" "$SCRATCH_JOB/data/Annotations"
+rsync -a "$DATA_ROOT/JPEGImages/" "$SCRATCH_JOB/data/JPEGImages/"
+rsync -a "$DATA_ROOT/Annotations/" "$SCRATCH_JOB/data/Annotations/"
+mkdir -p "$OUT"
+
+common=(--model "$MODEL" --data-root "$SCRATCH_JOB/data" --manifest "$MANIFEST_PATH")
+case "$MODE" in
+  smoke)
+    command=("$PYTHON_BIN" cetus_models/train_detector.py "${common[@]}"
+      --output "${OUT}_smoke" --no-pretrained --image-size 256
+      --epochs 1 --eval-every 1 --batch-size 1 --workers 0
+      --limit-train 12 --limit-val 6)
+    ;;
+  train)
+    command=("$PYTHON_BIN" cetus_models/train_detector.py "${common[@]}"
+      --output "$OUT" --image-size "${IMAGE_SIZE:-640}"
+      --epochs "${EPOCHS:-100}" --eval-every "${EVAL_EVERY:-5}"
+      --batch-size "${BATCH_SIZE:-1}" --workers "${WORKERS:-2}"
+      --seed "$SEED" --checkpoint-every-minutes "${CHECKPOINT_MINUTES:-15}"
+      --checkpoint-every-batches "${CHECKPOINT_BATCHES:-1000}")
+    if [[ -f "$OUT/last.pt" ]]; then
+      echo "Resuming $OUT/last.pt"
+      command+=(--resume "$OUT/last.pt")
+    else
+      command+=(--weights-path "$WEIGHTS_PATH")
+    fi
+    ;;
+  test)
+    command=("$PYTHON_BIN" cetus_models/train_detector.py "${common[@]}"
+      --output "$OUT/test_eval" --eval-only --split test
+      --checkpoint "$OUT/best.pt" --image-size "${IMAGE_SIZE:-640}"
+      --workers "${WORKERS:-2}")
+    ;;
+esac
+"${command[@]}" &
+CHILD_PID=$!
+wait "$CHILD_PID"

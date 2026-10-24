@@ -1,0 +1,45 @@
+{
+  "source_images": 14471,
+  "curated_images": 12026,
+  "removed_images": 2445,
+  "removal_reasons": {
+    "review_remove_near": 2276,
+    "propose_remove_exact_jitter": 1,
+    "propose_remove_exact": 168
+  },
+  "scene_groups": 2810,
+  "screened_similarity_pairs_grouped": 30124,
+  "split_balancing_moves": 48,
+  "split_counts": {
+    "train": {
+      "images": 8418,
+      "corrosion": 5236,
+      "leakage": 4166,
+      "abscission": 13029,
+      "crack": 10081,
+      "bulge": 1181
+    },
+    "val": {
+      "images": 1804,
+      "corrosion": 1122,
+      "leakage": 893,
+      "abscission": 2796,
+      "crack": 2161,
+      "bulge": 253
+    },
+    "test": {
+      "images": 1804,
+      "crack": 2160,
+      "abscission": 2818,
+      "leakage": 893,
+      "bulge": 253,
+      "corrosion": 1121
+    }
+  },
+  "clipped_out_of_bounds_boxes": 99,
+  "images_with_modified_xml": 88,
+  "images_with_no_labelled_objects": 4,
+  "source_manifest_sha256": "1ad8ec9c77ae84e64531490df1843e075ed0de2bd891f9e847e93821e9482742",
+  "curated_manifest_sha256": "6f4ab573cd61f1a28120120b10126feda16635e98a0d7db22270dcaba82007c1",
+  "wider_scene_review": "All adjacent image pairs with dHash distance <=4 and thumbnail difference <=0.06 were grouped; two visually confirmed nonadjacent pairs were also grouped. Seven visually different nonadjacent candidate pairs remain across splits after review."
+}

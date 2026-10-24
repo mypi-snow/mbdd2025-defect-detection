@@ -1,0 +1,25 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+.miniforge/
+.torch_cache/
+.pytest_cache/
+wheelhouse/
+downloads/
+weights/
+runs/
+output/
+.release-staging/
+environment.lock.txt
+*.zip
+*.pt
+*.pth
+*.tmp
+
+# The public source/curated image corpus is distributed separately. Keep the
+# versioned split manifest in Git but never commit images or per-image labels.
+/MBDD2025_curated_v1/JPEGImages/
+/MBDD2025_curated_v1/Annotations/
+/MBDD2025_curated_v1/Labels/
+/MBDD2025_curated_v1/ImageSets/

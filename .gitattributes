@@ -1,0 +1,6 @@
+# Preserve the byte-for-byte manifest and exported CSV hashes. csv.writer
+# produced CRLF records, which are valid CSV line endings.
+*.csv -text whitespace=cr-at-eol
+*.png binary
+*.pt binary
+*.pth binary

@@ -1,0 +1,44 @@
+{
+  "manifest_sha256": "6f4ab573cd61f1a28120120b10126feda16635e98a0d7db22270dcaba82007c1",
+  "images_by_split": {
+    "train": 8418,
+    "val": 1804,
+    "test": 1804
+  },
+  "instances_by_split": {
+    "train": {
+      "corrosion": 5236,
+      "leakage": 4166,
+      "abscission": 13029,
+      "crack": 10081,
+      "bulge": 1181
+    },
+    "val": {
+      "crack": 2161,
+      "leakage": 893,
+      "corrosion": 1122,
+      "abscission": 2796,
+      "bulge": 253
+    },
+    "test": {
+      "crack": 2160,
+      "leakage": 893,
+      "corrosion": 1121,
+      "abscission": 2818,
+      "bulge": 253
+    }
+  },
+  "box_counts": {
+    "total": 48163,
+    "very_large": 179,
+    "very_small": 3
+  },
+  "issues_by_type": {
+    "no_objects": 4
+  },
+  "blocking_issue_images": 0,
+  "exact_duplicate_groups": 0,
+  "extra_exact_duplicate_images": 0,
+  "cross_split_exact_duplicate_groups": 0,
+  "review_queue_rows": 282
+}
