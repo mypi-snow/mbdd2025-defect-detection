@@ -1,0 +1,539 @@
+
+=== 2026-10-19 16:58:35 python -u train_detector.py --model retinanet --data-root MBDD2025_curated_v1 --manifest MBDD2025_curated_v1\split_manifest.csv --output runs\retinanet_local_aug --augmentation standard --epochs 40 --workers 6 --seed 42 --batch-size 1 --image-size 640 --eval-every 5 ===
+checkpoint epoch=1 batch=1000/8418 step=1000
+checkpoint epoch=1 batch=2000/8418 step=2000
+checkpoint epoch=1 batch=3000/8418 step=3000
+checkpoint epoch=1 batch=4000/8418 step=4000
+checkpoint epoch=1 batch=5000/8418 step=5000
+checkpoint epoch=1 batch=6000/8418 step=6000
+checkpoint epoch=1 batch=7000/8418 step=7000
+checkpoint epoch=1 batch=8000/8418 step=8000
+epoch=1 mean_loss=1.17262 seconds=1342.4
+checkpoint epoch=2 batch=1000/8418 step=9418
+checkpoint epoch=2 batch=2000/8418 step=10418
+checkpoint epoch=2 batch=3000/8418 step=11418
+checkpoint epoch=2 batch=4000/8418 step=12418
+checkpoint epoch=2 batch=5000/8418 step=13418
+checkpoint epoch=2 batch=6000/8418 step=14418
+checkpoint epoch=2 batch=7000/8418 step=15418
+checkpoint epoch=2 batch=8000/8418 step=16418
+epoch=2 mean_loss=0.91930 seconds=1463.8
+checkpoint epoch=3 batch=1000/8418 step=17836
+checkpoint epoch=3 batch=2000/8418 step=18836
+checkpoint epoch=3 batch=3000/8418 step=19836
+checkpoint epoch=3 batch=4000/8418 step=20836
+checkpoint epoch=3 batch=5000/8418 step=21836
+checkpoint epoch=3 batch=6000/8418 step=22836
+checkpoint epoch=3 batch=7000/8418 step=23836
+checkpoint epoch=3 batch=8000/8418 step=24836
+epoch=3 mean_loss=0.79159 seconds=1656.9
+checkpoint epoch=4 batch=1000/8418 step=26254
+checkpoint epoch=4 batch=2000/8418 step=27254
+checkpoint epoch=4 batch=3000/8418 step=28254
+checkpoint epoch=4 batch=4000/8418 step=29254
+checkpoint epoch=4 batch=5000/8418 step=30254
+checkpoint epoch=4 batch=6000/8418 step=31254
+checkpoint epoch=4 batch=7000/8418 step=32254
+checkpoint epoch=4 batch=8000/8418 step=33254
+epoch=4 mean_loss=0.72320 seconds=1696.3
+checkpoint epoch=5 batch=1000/8418 step=34672
+checkpoint epoch=5 batch=2000/8418 step=35672
+checkpoint epoch=5 batch=3000/8418 step=36672
+checkpoint epoch=5 batch=4000/8418 step=37672
+checkpoint epoch=5 batch=5000/8418 step=38672
+checkpoint epoch=5 batch=6000/8418 step=39672
+checkpoint epoch=5 batch=7000/8418 step=40672
+checkpoint epoch=5 batch=8000/8418 step=41672
+epoch=5 mean_loss=0.69399 seconds=1650.8
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=11.12s).
+Accumulating evaluation results...
+DONE (t=2.54s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.038
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.096
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.020
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.001
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.021
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.093
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.048
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.102
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.138
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.007
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.088
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.242
+epoch=5 val_mAP50_95=0.03783 best=0.03783
+checkpoint epoch=6 batch=1000/8418 step=43090
+checkpoint epoch=6 batch=2000/8418 step=44090
+checkpoint epoch=6 batch=3000/8418 step=45090
+checkpoint epoch=6 batch=4000/8418 step=46090
+checkpoint epoch=6 batch=5000/8418 step=47090
+checkpoint epoch=6 batch=6000/8418 step=48090
+checkpoint epoch=6 batch=7000/8418 step=49090
+checkpoint epoch=6 batch=8000/8418 step=50090
+epoch=6 mean_loss=0.69255 seconds=1709.7
+checkpoint epoch=7 batch=1000/8418 step=51508
+checkpoint epoch=7 batch=2000/8418 step=52508
+checkpoint epoch=7 batch=3000/8418 step=53508
+checkpoint epoch=7 batch=4000/8418 step=54508
+checkpoint epoch=7 batch=5000/8418 step=55508
+checkpoint epoch=7 batch=6000/8418 step=56508
+checkpoint epoch=7 batch=7000/8418 step=57508
+checkpoint epoch=7 batch=8000/8418 step=58508
+epoch=7 mean_loss=0.69660 seconds=1623.0
+checkpoint epoch=8 batch=1000/8418 step=59926
+checkpoint epoch=8 batch=2000/8418 step=60926
+checkpoint epoch=8 batch=3000/8418 step=61926
+checkpoint epoch=8 batch=4000/8418 step=62926
+checkpoint epoch=8 batch=5000/8418 step=63926
+checkpoint epoch=8 batch=6000/8418 step=64926
+checkpoint epoch=8 batch=7000/8418 step=65926
+checkpoint epoch=8 batch=8000/8418 step=66926
+epoch=8 mean_loss=0.63963 seconds=1478.5
+checkpoint epoch=9 batch=1000/8418 step=68344
+checkpoint epoch=9 batch=2000/8418 step=69344
+checkpoint epoch=9 batch=3000/8418 step=70344
+checkpoint epoch=9 batch=4000/8418 step=71344
+checkpoint epoch=9 batch=5000/8418 step=72344
+checkpoint epoch=9 batch=6000/8418 step=73344
+checkpoint epoch=9 batch=7000/8418 step=74344
+checkpoint epoch=9 batch=8000/8418 step=75344
+epoch=9 mean_loss=0.62980 seconds=1525.1
+checkpoint epoch=10 batch=1000/8418 step=76762
+checkpoint epoch=10 batch=2000/8418 step=77762
+checkpoint epoch=10 batch=3000/8418 step=78762
+checkpoint epoch=10 batch=4000/8418 step=79762
+checkpoint epoch=10 batch=5000/8418 step=80762
+checkpoint epoch=10 batch=6000/8418 step=81762
+checkpoint epoch=10 batch=7000/8418 step=82762
+checkpoint epoch=10 batch=8000/8418 step=83762
+epoch=10 mean_loss=0.62914 seconds=1579.7
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=10.77s).
+Accumulating evaluation results...
+DONE (t=2.63s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.026
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.079
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.012
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.018
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.056
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.036
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.085
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.119
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.003
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.085
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.201
+epoch=10 val_mAP50_95=0.02598 best=0.03783
+checkpoint epoch=11 batch=1000/8418 step=85180
+checkpoint epoch=11 batch=2000/8418 step=86180
+checkpoint epoch=11 batch=3000/8418 step=87180
+checkpoint epoch=11 batch=4000/8418 step=88180
+checkpoint epoch=11 batch=5000/8418 step=89180
+checkpoint epoch=11 batch=6000/8418 step=90180
+checkpoint epoch=11 batch=7000/8418 step=91180
+checkpoint epoch=11 batch=8000/8418 step=92180
+epoch=11 mean_loss=0.62122 seconds=1647.9
+checkpoint epoch=12 batch=1000/8418 step=93598
+checkpoint epoch=12 batch=2000/8418 step=94598
+checkpoint epoch=12 batch=3000/8418 step=95598
+checkpoint epoch=12 batch=4000/8418 step=96598
+checkpoint epoch=12 batch=5000/8418 step=97598
+checkpoint epoch=12 batch=6000/8418 step=98598
+checkpoint epoch=12 batch=7000/8418 step=99598
+checkpoint epoch=12 batch=8000/8418 step=100598
+epoch=12 mean_loss=0.62823 seconds=1646.0
+checkpoint epoch=13 batch=1000/8418 step=102016
+checkpoint epoch=13 batch=2000/8418 step=103016
+checkpoint epoch=13 batch=3000/8418 step=104016
+checkpoint epoch=13 batch=4000/8418 step=105016
+checkpoint epoch=13 batch=5000/8418 step=106016
+checkpoint epoch=13 batch=6000/8418 step=107016
+checkpoint epoch=13 batch=7000/8418 step=108016
+checkpoint epoch=13 batch=8000/8418 step=109016
+epoch=13 mean_loss=0.60061 seconds=1646.8
+checkpoint epoch=14 batch=1000/8418 step=110434
+checkpoint epoch=14 batch=2000/8418 step=111434
+checkpoint epoch=14 batch=3000/8418 step=112434
+checkpoint epoch=14 batch=4000/8418 step=113434
+checkpoint epoch=14 batch=5000/8418 step=114434
+checkpoint epoch=14 batch=6000/8418 step=115434
+checkpoint epoch=14 batch=7000/8418 step=116434
+checkpoint epoch=14 batch=8000/8418 step=117434
+epoch=14 mean_loss=0.62805 seconds=1644.7
+checkpoint epoch=15 batch=1000/8418 step=118852
+checkpoint epoch=15 batch=2000/8418 step=119852
+checkpoint epoch=15 batch=3000/8418 step=120852
+checkpoint epoch=15 batch=4000/8418 step=121852
+checkpoint epoch=15 batch=5000/8418 step=122852
+checkpoint epoch=15 batch=6000/8418 step=123852
+checkpoint epoch=15 batch=7000/8418 step=124852
+checkpoint epoch=15 batch=8000/8418 step=125852
+epoch=15 mean_loss=0.63511 seconds=1636.2
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=7.06s).
+Accumulating evaluation results...
+DONE (t=1.86s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.019
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.055
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.009
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.001
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.020
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.031
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.027
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.068
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.082
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.001
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.078
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.116
+epoch=15 val_mAP50_95=0.01899 best=0.03783
+checkpoint epoch=16 batch=1000/8418 step=127270
+checkpoint epoch=16 batch=2000/8418 step=128270
+checkpoint epoch=16 batch=3000/8418 step=129270
+checkpoint epoch=16 batch=4000/8418 step=130270
+checkpoint epoch=16 batch=5000/8418 step=131270
+checkpoint epoch=16 batch=6000/8418 step=132270
+checkpoint epoch=16 batch=7000/8418 step=133270
+checkpoint epoch=16 batch=8000/8418 step=134270
+epoch=16 mean_loss=0.59865 seconds=1679.4
+checkpoint epoch=17 batch=1000/8418 step=135688
+checkpoint epoch=17 batch=2000/8418 step=136688
+checkpoint epoch=17 batch=3000/8418 step=137688
+checkpoint epoch=17 batch=4000/8418 step=138688
+checkpoint epoch=17 batch=5000/8418 step=139688
+checkpoint epoch=17 batch=6000/8418 step=140688
+checkpoint epoch=17 batch=7000/8418 step=141688
+checkpoint epoch=17 batch=8000/8418 step=142688
+epoch=17 mean_loss=0.59478 seconds=1631.4
+checkpoint epoch=18 batch=1000/8418 step=144106
+checkpoint epoch=18 batch=2000/8418 step=145106
+checkpoint epoch=18 batch=3000/8418 step=146106
+checkpoint epoch=18 batch=4000/8418 step=147106
+checkpoint epoch=18 batch=5000/8418 step=148106
+checkpoint epoch=18 batch=6000/8418 step=149106
+checkpoint epoch=18 batch=7000/8418 step=150106
+checkpoint epoch=18 batch=8000/8418 step=151106
+epoch=18 mean_loss=0.60605 seconds=1643.8
+checkpoint epoch=19 batch=1000/8418 step=152524
+checkpoint epoch=19 batch=2000/8418 step=153524
+checkpoint epoch=19 batch=3000/8418 step=154524
+checkpoint epoch=19 batch=4000/8418 step=155524
+checkpoint epoch=19 batch=5000/8418 step=156524
+checkpoint epoch=19 batch=6000/8418 step=157524
+checkpoint epoch=19 batch=7000/8418 step=158524
+checkpoint epoch=19 batch=8000/8418 step=159524
+epoch=19 mean_loss=0.60378 seconds=1650.7
+checkpoint epoch=20 batch=1000/8418 step=160942
+checkpoint epoch=20 batch=2000/8418 step=161942
+checkpoint epoch=20 batch=3000/8418 step=162942
+checkpoint epoch=20 batch=4000/8418 step=163942
+checkpoint epoch=20 batch=5000/8418 step=164942
+checkpoint epoch=20 batch=6000/8418 step=165942
+checkpoint epoch=20 batch=7000/8418 step=166942
+checkpoint epoch=20 batch=8000/8418 step=167942
+epoch=20 mean_loss=0.60430 seconds=1636.5
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=10.42s).
+Accumulating evaluation results...
+DONE (t=2.30s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.018
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.052
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.010
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.002
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.011
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.032
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.024
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.069
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.095
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.013
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.079
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.135
+epoch=20 val_mAP50_95=0.01799 best=0.03783
+checkpoint epoch=21 batch=1000/8418 step=169360
+checkpoint epoch=21 batch=2000/8418 step=170360
+checkpoint epoch=21 batch=3000/8418 step=171360
+checkpoint epoch=21 batch=4000/8418 step=172360
+checkpoint epoch=21 batch=5000/8418 step=173360
+checkpoint epoch=21 batch=6000/8418 step=174360
+checkpoint epoch=21 batch=7000/8418 step=175360
+checkpoint epoch=21 batch=8000/8418 step=176360
+epoch=21 mean_loss=0.47197 seconds=1686.6
+checkpoint epoch=22 batch=1000/8418 step=177778
+checkpoint epoch=22 batch=2000/8418 step=178778
+checkpoint epoch=22 batch=3000/8418 step=179778
+checkpoint epoch=22 batch=4000/8418 step=180778
+checkpoint epoch=22 batch=5000/8418 step=181778
+checkpoint epoch=22 batch=6000/8418 step=182778
+checkpoint epoch=22 batch=7000/8418 step=183778
+checkpoint epoch=22 batch=8000/8418 step=184778
+epoch=22 mean_loss=0.44093 seconds=1641.0
+checkpoint epoch=23 batch=1000/8418 step=186196
+checkpoint epoch=23 batch=2000/8418 step=187196
+checkpoint epoch=23 batch=3000/8418 step=188196
+checkpoint epoch=23 batch=4000/8418 step=189196
+checkpoint epoch=23 batch=5000/8418 step=190196
+checkpoint epoch=23 batch=6000/8418 step=191196
+checkpoint epoch=23 batch=7000/8418 step=192196
+checkpoint epoch=23 batch=8000/8418 step=193196
+epoch=23 mean_loss=0.42891 seconds=1674.8
+checkpoint epoch=24 batch=1000/8418 step=194614
+checkpoint epoch=24 batch=2000/8418 step=195614
+checkpoint epoch=24 batch=3000/8418 step=196614
+checkpoint epoch=24 batch=4000/8418 step=197614
+checkpoint epoch=24 batch=5000/8418 step=198614
+checkpoint epoch=24 batch=6000/8418 step=199614
+checkpoint epoch=24 batch=7000/8418 step=200614
+checkpoint epoch=24 batch=8000/8418 step=201614
+epoch=24 mean_loss=0.42214 seconds=1713.4
+checkpoint epoch=25 batch=1000/8418 step=203032
+checkpoint epoch=25 batch=2000/8418 step=204032
+checkpoint epoch=25 batch=3000/8418 step=205032
+checkpoint epoch=25 batch=4000/8418 step=206032
+checkpoint epoch=25 batch=5000/8418 step=207032
+checkpoint epoch=25 batch=6000/8418 step=208032
+checkpoint epoch=25 batch=7000/8418 step=209032
+checkpoint epoch=25 batch=8000/8418 step=210032
+epoch=25 mean_loss=0.41725 seconds=1650.9
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=9.95s).
+Accumulating evaluation results...
+DONE (t=2.29s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.033
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.088
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.017
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.002
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.037
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.048
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.036
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.091
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.121
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.008
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.139
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.156
+epoch=25 val_mAP50_95=0.03340 best=0.03783
+checkpoint epoch=26 batch=1000/8418 step=211450
+checkpoint epoch=26 batch=2000/8418 step=212450
+checkpoint epoch=26 batch=3000/8418 step=213450
+checkpoint epoch=26 batch=4000/8418 step=214450
+checkpoint epoch=26 batch=5000/8418 step=215450
+checkpoint epoch=26 batch=6000/8418 step=216450
+checkpoint epoch=26 batch=7000/8418 step=217450
+checkpoint epoch=26 batch=8000/8418 step=218450
+epoch=26 mean_loss=0.41084 seconds=1801.8
+checkpoint epoch=27 batch=1000/8418 step=219868
+checkpoint epoch=27 batch=2000/8418 step=220868
+checkpoint epoch=27 batch=3000/8418 step=221868
+checkpoint epoch=27 batch=4000/8418 step=222868
+checkpoint epoch=27 batch=5000/8418 step=223868
+checkpoint epoch=27 batch=6000/8418 step=224868
+checkpoint epoch=27 batch=7000/8418 step=225868
+checkpoint epoch=27 batch=8000/8418 step=226868
+epoch=27 mean_loss=0.40931 seconds=1764.3
+checkpoint epoch=28 batch=1000/8418 step=228286
+checkpoint epoch=28 batch=2000/8418 step=229286
+checkpoint epoch=28 batch=3000/8418 step=230286
+checkpoint epoch=28 batch=4000/8418 step=231286
+checkpoint epoch=28 batch=5000/8418 step=232286
+checkpoint epoch=28 batch=6000/8418 step=233286
+checkpoint epoch=28 batch=7000/8418 step=234286
+checkpoint epoch=28 batch=8000/8418 step=235286
+epoch=28 mean_loss=0.40390 seconds=1760.7
+checkpoint epoch=29 batch=1000/8418 step=236704
+checkpoint epoch=29 batch=2000/8418 step=237704
+checkpoint epoch=29 batch=3000/8418 step=238704
+checkpoint epoch=29 batch=4000/8418 step=239704
+checkpoint epoch=29 batch=5000/8418 step=240704
+checkpoint epoch=29 batch=6000/8418 step=241704
+checkpoint epoch=29 batch=7000/8418 step=242704
+checkpoint epoch=29 batch=8000/8418 step=243704
+epoch=29 mean_loss=0.40029 seconds=1755.3
+checkpoint epoch=30 batch=1000/8418 step=245122
+checkpoint epoch=30 batch=2000/8418 step=246122
+checkpoint epoch=30 batch=3000/8418 step=247122
+checkpoint epoch=30 batch=4000/8418 step=248122
+checkpoint epoch=30 batch=5000/8418 step=249122
+checkpoint epoch=30 batch=6000/8418 step=250122
+checkpoint epoch=30 batch=7000/8418 step=251122
+checkpoint epoch=30 batch=8000/8418 step=252122
+epoch=30 mean_loss=0.39675 seconds=1750.2
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=9.30s).
+Accumulating evaluation results...
+DONE (t=2.37s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.039
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.104
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.017
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.005
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.042
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.049
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.053
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.106
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.130
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.016
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.158
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.157
+epoch=30 val_mAP50_95=0.03857 best=0.03857
+checkpoint epoch=31 batch=1000/8418 step=253540
+checkpoint epoch=31 batch=2000/8418 step=254540
+checkpoint epoch=31 batch=3000/8418 step=255540
+checkpoint epoch=31 batch=4000/8418 step=256540
+checkpoint epoch=31 batch=5000/8418 step=257540
+checkpoint epoch=31 batch=6000/8418 step=258540
+checkpoint epoch=31 batch=7000/8418 step=259540
+checkpoint epoch=31 batch=8000/8418 step=260540
+epoch=31 mean_loss=0.39382 seconds=1787.1
+checkpoint epoch=32 batch=1000/8418 step=261958
+checkpoint epoch=32 batch=2000/8418 step=262958
+checkpoint epoch=32 batch=3000/8418 step=263958
+checkpoint epoch=32 batch=4000/8418 step=264958
+checkpoint epoch=32 batch=5000/8418 step=265958
+checkpoint epoch=32 batch=6000/8418 step=266958
+checkpoint epoch=32 batch=7000/8418 step=267958
+checkpoint epoch=32 batch=8000/8418 step=268958
+epoch=32 mean_loss=0.38922 seconds=1746.2
+checkpoint epoch=33 batch=1000/8418 step=270376
+checkpoint epoch=33 batch=2000/8418 step=271376
+checkpoint epoch=33 batch=3000/8418 step=272376
+checkpoint epoch=33 batch=4000/8418 step=273376
+checkpoint epoch=33 batch=5000/8418 step=274376
+checkpoint epoch=33 batch=6000/8418 step=275376
+checkpoint epoch=33 batch=7000/8418 step=276376
+checkpoint epoch=33 batch=8000/8418 step=277376
+epoch=33 mean_loss=0.39008 seconds=1751.5
+checkpoint epoch=34 batch=1000/8418 step=278794
+checkpoint epoch=34 batch=2000/8418 step=279794
+checkpoint epoch=34 batch=3000/8418 step=280794
+checkpoint epoch=34 batch=4000/8418 step=281794
+checkpoint epoch=34 batch=5000/8418 step=282794
+checkpoint epoch=34 batch=6000/8418 step=283794
+checkpoint epoch=34 batch=7000/8418 step=284794
+checkpoint epoch=34 batch=8000/8418 step=285794
+epoch=34 mean_loss=0.38614 seconds=1690.0
+checkpoint epoch=35 batch=1000/8418 step=287212
+checkpoint epoch=35 batch=2000/8418 step=288212
+checkpoint epoch=35 batch=3000/8418 step=289212
+checkpoint epoch=35 batch=4000/8418 step=290212
+checkpoint epoch=35 batch=5000/8418 step=291212
+checkpoint epoch=35 batch=6000/8418 step=292212
+checkpoint epoch=35 batch=7000/8418 step=293212
+checkpoint epoch=35 batch=8000/8418 step=294212
+epoch=35 mean_loss=0.38648 seconds=1426.5
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=9.50s).
+Accumulating evaluation results...
+DONE (t=2.25s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.039
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.104
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.023
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.003
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.026
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.044
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.038
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.089
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.110
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.008
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.108
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.128
+epoch=35 val_mAP50_95=0.03919 best=0.03919
+checkpoint epoch=36 batch=1000/8418 step=295630
+checkpoint epoch=36 batch=2000/8418 step=296630
+checkpoint epoch=36 batch=3000/8418 step=297630
+checkpoint epoch=36 batch=4000/8418 step=298630
+checkpoint epoch=36 batch=5000/8418 step=299630
+checkpoint epoch=36 batch=6000/8418 step=300630
+checkpoint epoch=36 batch=7000/8418 step=301630
+checkpoint epoch=36 batch=8000/8418 step=302630
+epoch=36 mean_loss=0.38329 seconds=1372.6
+checkpoint epoch=37 batch=1000/8418 step=304048
+checkpoint epoch=37 batch=2000/8418 step=305048
+checkpoint epoch=37 batch=3000/8418 step=306048
+checkpoint epoch=37 batch=4000/8418 step=307048
+checkpoint epoch=37 batch=5000/8418 step=308048
+checkpoint epoch=37 batch=6000/8418 step=309048
+checkpoint epoch=37 batch=7000/8418 step=310048
+checkpoint epoch=37 batch=8000/8418 step=311048
+epoch=37 mean_loss=0.38070 seconds=1507.6
+checkpoint epoch=38 batch=1000/8418 step=312466
+checkpoint epoch=38 batch=2000/8418 step=313466
+checkpoint epoch=38 batch=3000/8418 step=314466
+checkpoint epoch=38 batch=4000/8418 step=315466
+checkpoint epoch=38 batch=5000/8418 step=316466
+checkpoint epoch=38 batch=6000/8418 step=317466
+checkpoint epoch=38 batch=7000/8418 step=318466
+checkpoint epoch=38 batch=8000/8418 step=319466
+epoch=38 mean_loss=0.37915 seconds=1553.7
+checkpoint epoch=39 batch=1000/8418 step=320884
+checkpoint epoch=39 batch=2000/8418 step=321884
+checkpoint epoch=39 batch=3000/8418 step=322884
+checkpoint epoch=39 batch=4000/8418 step=323884
+checkpoint epoch=39 batch=5000/8418 step=324884
+checkpoint epoch=39 batch=6000/8418 step=325884
+checkpoint epoch=39 batch=7000/8418 step=326884
+checkpoint epoch=39 batch=8000/8418 step=327884
+epoch=39 mean_loss=0.38239 seconds=1522.4
+checkpoint epoch=40 batch=1000/8418 step=329302
+checkpoint epoch=40 batch=2000/8418 step=330302
+checkpoint epoch=40 batch=3000/8418 step=331302
+checkpoint epoch=40 batch=4000/8418 step=332302
+checkpoint epoch=40 batch=5000/8418 step=333302
+checkpoint epoch=40 batch=6000/8418 step=334302
+checkpoint epoch=40 batch=7000/8418 step=335302
+checkpoint epoch=40 batch=8000/8418 step=336302
+epoch=40 mean_loss=0.38123 seconds=1492.3
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=9.26s).
+Accumulating evaluation results...
+DONE (t=2.48s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.045
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.123
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.022
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.007
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.049
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.059
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.050
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.101
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.127
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.015
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.131
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.168
+epoch=40 val_mAP50_95=0.04461 best=0.04461
+Selected checkpoint: runs\retinanet_local_aug\best.pt

@@ -94,6 +94,8 @@ def main() -> int:
     parser.add_argument("--image-size", type=int, default=640)
     parser.add_argument("--batch-size", type=int, default=1)
     parser.add_argument("--workers", type=int, default=2)
+    parser.add_argument("--augmentation", choices=("none", "standard"), default="none",
+                        help="Training augmentation; changes the default run name")
     parser.add_argument("--eval-every", type=int, default=5)
     parser.add_argument("--checkpoint-minutes", type=int, default=15)
     parser.add_argument("--checkpoint-batches", type=int, default=1000)
@@ -104,7 +106,10 @@ def main() -> int:
         parser.error("seed, epochs, batch size, workers or eval interval invalid")
     if args.image_size < 256 or args.image_size % 32 or args.checkpoint_minutes < 1 or args.checkpoint_batches < 1:
         parser.error("image size must be >=256 and divisible by 32; checkpoint intervals must be positive")
-    name = args.run_name or f"{args.model}_curated_seed{args.seed}"
+    # An augmented run must not default onto the baseline directory, or the PBS
+    # script would resume the baseline's last.pt instead of starting a new run.
+    suffix = "" if args.augmentation == "none" else f"_{args.augmentation}"
+    name = args.run_name or f"{args.model}_curated{suffix}_seed{args.seed}"
     if not re.fullmatch(r"[A-Za-z0-9_-]+", name):
         parser.error("run name may contain only letters, digits, _ and -")
     manifest = ROOT / "MBDD2025_curated_v1/split_manifest.csv"
@@ -146,6 +151,7 @@ def main() -> int:
         "BATCH_SIZE": batch_size, "WORKERS": workers,
         "EVAL_EVERY": eval_every, "CHECKPOINT_MINUTES": args.checkpoint_minutes,
         "CHECKPOINT_BATCHES": args.checkpoint_batches,
+        "AUGMENTATION": "none" if args.mode != "train" else args.augmentation,
     }
     walltime = "01:00:00" if args.mode == "smoke" else "48:00:00"
     command = ["qsub", "-l", f"select=1:ncpus=6:mem={memory}:ngpus=1",
@@ -158,6 +164,7 @@ def main() -> int:
         command[1:1] = ["-M", args.email]
     print(f"CPU memory: {memory} ({basis})")
     print(f"Batch size: {batch_size}; image size: {image_size}. GPU VRAM is separate from PBS CPU RAM.")
+    print(f"Run name: {name}; augmentation: {variables['AUGMENTATION']}")
     print("PBS command:", " ".join(command))
     if not args.dry_run:
         result = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, check=True)

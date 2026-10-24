@@ -75,6 +75,70 @@ For a quick, dependency-free consistency check of the committed evidence:
 python3 scripts/verify_artifacts.py
 ```
 
+## Augmentation study
+
+A controlled comparison of training with and without data augmentation, for
+both detectors. All four runs used the same machine (one **NVIDIA GeForce RTX
+5070 Ti Laptop GPU**, PyTorch 2.11.0, torchvision 0.26.0), the same curated
+split, seed 42, 640 × 640 input, batch 1 and the baseline optimiser and
+schedule, for **40 epochs**. Within each detector the two arms differ only in
+`--augmentation`. The baseline arms were retrained on the laptop rather than
+reusing the cluster runs above: the same Faster R-CNN baseline reached 0.164
+validation mAP50 after 40 epochs on the laptop against 0.186 on CETUS, a
+platform gap as large as the effect being measured.
+
+`--augmentation standard` applies, to the training split only:
+
+| Transform | Setting |
+| --- | --- |
+| Scale jitter | 0.5–1.5× of the letterbox scale, random placement and crop on the 640 × 640 canvas |
+| Horizontal flip | p = 0.5 (no vertical flip: leakage stains run downwards) |
+| Brightness, contrast, saturation | ±25% each |
+| Hue | ±0.03 |
+
+Boxes are transformed with the image and clipped to the canvas. A box is
+dropped if a side falls below 2 px or less than 25% of its area remains. If a
+draw would leave a labelled image empty, it is redrawn up to ten times, then the
+unaugmented placement is used. With `--augmentation none` the dataset output is
+bit-identical to the baseline code. Validation and test images are never
+augmented.
+
+Checkpoints were selected on validation mAP50–95 (every five epochs), and each
+selected checkpoint was then evaluated **once** on the held-out test split:
+
+| Run | Selected epoch | Val mAP50–95 | Test mAP50 | Test mAP50–95 |
+| --- | ---: | ---: | ---: | ---: |
+| Faster R-CNN, none | 30 | 0.0722 | **0.2158** | **0.0915** |
+| Faster R-CNN, standard | 35 | 0.0780 | 0.2025 | 0.0824 |
+| RetinaNet, none | 5 | 0.0415 | 0.1699 | 0.0665 |
+| RetinaNet, standard | 40 | 0.0446 | 0.1865 | 0.0817 |
+
+Augmentation kept the final training loss about three times higher and moved
+the validation peak later in both detectors, so it delayed overfitting as
+intended. Its effect on test accuracy depended on the architecture: RetinaNet
+improved, Faster R-CNN regressed. Per class, bulge and abscission gained in both
+detectors, while leakage (−0.109 and −0.033 AP50) and corrosion (−0.036 and
+−0.022) lost, which suggests colour jitter removes a cue those two classes rely
+on. With one seed and 105 test scenes, differences of about 0.01 mAP are not
+separable from run-to-run variation.
+
+Raw evidence is in `results/augmentation_study/<run>/`: `run.json`,
+`train.log`, every validation metrics JSON and `test_eval/test_metrics.json`
+with its log. `summary_all_runs.csv` collects the headline and per-class
+numbers. Prediction JSONs (3–38 MB each) and checkpoints are not committed.
+Figures: [examples](figures/augmentation_examples.png),
+[validation curves](figures/augmentation_validation_curves.png),
+[test comparison](figures/augmentation_test_comparison.png) and
+[per-class change](figures/augmentation_per_class_delta.png).
+
+To rerun all four arms and their test evaluations unattended on one GPU, with
+the curated images placed in `MBDD2025_curated_v1/`:
+
+```bash
+python scripts/run_all.py            # resumable; safe to stop and re-run
+python scripts/run_all.py --status   # progress and estimated time left
+```
+
 ## Dataset curation and split
 
 The source had **14,471 images**. The curation proposal removed **2,445**:

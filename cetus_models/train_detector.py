@@ -7,7 +7,6 @@ only through --eval-only --split test, after a checkpoint has been selected.
 from __future__ import annotations
 
 import argparse
-import fcntl
 import json
 import os
 import random
@@ -30,7 +29,35 @@ from torchvision.models.detection import (
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 from torchvision.models.detection.retinanet import RetinaNetClassificationHead
 
-from mbdd_data import CURATED_MANIFEST_SHA256, MBDDDataset, collate_fn
+from mbdd_data import (
+    AUGMENTATION_CHOICES,
+    CURATED_MANIFEST_SHA256,
+    MBDDDataset,
+    collate_fn,
+)
+
+try:  # fcntl is POSIX only; Windows uses the msvcrt fallback in acquire_run_lock
+    import fcntl
+except ImportError:
+    fcntl = None
+
+
+def acquire_run_lock(path: Path):
+    """Stop two processes writing one run directory. Returns the held stream."""
+    stream = path.open("a+")
+    try:
+        if fcntl is not None:
+            fcntl.flock(stream, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        else:
+            import msvcrt
+            stream.write("lock\n")
+            stream.flush()
+            stream.seek(0)
+            msvcrt.locking(stream.fileno(), msvcrt.LK_NBLCK, 1)
+    except OSError as error:
+        stream.close()
+        raise RuntimeError(f"Another process is training in {path.parent}") from error
+    return stream
 from metrics import collect_predictions, ground_truth, score_predictions, write_json
 
 
@@ -50,6 +77,8 @@ def arguments():
     parser.add_argument("--batch-size", type=int, default=2)
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--lr", type=float, default=0.0025)
+    parser.add_argument("--augmentation", choices=AUGMENTATION_CHOICES, default="none",
+                        help="Training-split augmentation; 'none' reproduces the baselines")
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--eval-every", type=int, default=5)
     parser.add_argument("--checkpoint-every-minutes", type=float, default=15,
@@ -71,6 +100,8 @@ def arguments():
         parser.error("--image-size must be at least 256 and divisible by 32")
     if args.eval_only and not args.checkpoint:
         parser.error("--eval-only requires --checkpoint")
+    if args.eval_only and args.augmentation != "none":
+        parser.error("Augmentation applies to training only; evaluation is never augmented")
     if not args.eval_only and args.split != "val":
         parser.error("Training only evaluates validation; use --eval-only for test")
     if args.no_pretrained and args.weights_path:
@@ -166,6 +197,7 @@ def training_payload(model, optimizer, scheduler, scaler, args, manifest_sha256,
         "pending_validation_epoch": pending_validation_epoch,
         "model_name": args.model, "image_size": args.image_size,
         "batch_size": args.batch_size, "seed": args.seed, "learning_rate": args.lr,
+        "augmentation": args.augmentation,
         "manifest_sha256": manifest_sha256, "rng": rng_state(),
     }
 
@@ -234,19 +266,17 @@ def main():
                           "mAP50_95": result["mAP50_95"]}, indent=2))
         return
 
-    # fcntl releases this lock even if PBS kills the process, preventing two
-    # jobs from accidentally writing the same last.pt concurrently.
-    lock_stream = (args.output / ".train.lock").open("a+")
-    try:
-        fcntl.flock(lock_stream, fcntl.LOCK_EX | fcntl.LOCK_NB)
-    except BlockingIOError as error:
-        raise RuntimeError(f"Another process is training in {args.output}") from error
-    signal.signal(signal.SIGTERM, request_stop)
-    signal.signal(signal.SIGINT, request_stop)
-    signal.signal(signal.SIGUSR1, request_stop)
+    # The operating system releases this lock even if the process is killed,
+    # preventing two jobs from writing the same last.pt concurrently.
+    lock_stream = acquire_run_lock(args.output / ".train.lock")
+    for name in ("SIGTERM", "SIGINT", "SIGUSR1"):
+        handled = getattr(signal, name, None)  # SIGUSR1 does not exist on Windows
+        if handled is not None:
+            signal.signal(handled, request_stop)
 
     train_set = MBDDDataset(args.data_root, args.manifest, "train",
-                            args.image_size, args.limit_train)
+                            args.image_size, args.limit_train,
+                            augment=args.augmentation)
     optimizer = torch.optim.SGD(model.parameters(), lr=args.lr,
                                 momentum=0.9, weight_decay=0.0005)
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=20, gamma=0.1)
@@ -265,7 +295,8 @@ def main():
         if checkpoint["manifest_sha256"] != train_set.manifest_sha256:
             raise ValueError("Resume checkpoint uses another manifest")
         for key, expected in (("batch_size", args.batch_size), ("seed", args.seed),
-                              ("learning_rate", args.lr)):
+                              ("learning_rate", args.lr),
+                              ("augmentation", args.augmentation)):
             if key in checkpoint and checkpoint[key] != expected:
                 raise ValueError(f"Resume checkpoint {key} differs from this run")
         model.load_state_dict(checkpoint["model"])
@@ -291,7 +322,7 @@ def main():
     run_info = {
         "model": args.model, "seed": args.seed, "epochs": args.epochs,
         "batch_size": args.batch_size, "image_size": args.image_size,
-        "learning_rate": args.lr, "augmentation": "none",
+        "learning_rate": args.lr, "augmentation": args.augmentation,
         "pretraining": "none" if args.no_pretrained else "COCO",
         "weights_path": str(args.weights_path) if args.weights_path else None,
         "manifest_sha256": train_set.manifest_sha256,
