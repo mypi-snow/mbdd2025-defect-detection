@@ -66,6 +66,12 @@ optimizer, scheduler and random-number state. Do not run two jobs with the
 same run name simultaneously. For a changed image size, seed or batch size,
 start a new `--run-name` instead.
 
+Add `--augmentation standard` to a train command for the augmented arm. Its
+default run name becomes `<model>_curated_standard_seed42`, so it cannot resume
+the baseline's `last.pt`; pass that name as `--run-name` when testing it. The
+default, `--augmentation none`, reproduces the baselines exactly. To run the
+four-run comparison on a single local GPU instead, see `scripts/run_all.py`.
+
 ## 4. Evaluate after selection
 
 ```bash

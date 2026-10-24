@@ -12,6 +12,7 @@ cd "${PBS_O_WORKDIR:?Submit from the project directory}"
 MODEL="${MODEL:-fasterrcnn}"
 MODE="${MODE:-smoke}"
 SEED="${SEED:-42}"
+AUGMENTATION="${AUGMENTATION:-none}"
 RUN_NAME="${RUN_NAME:-${MODEL}_curated_seed${SEED}}"
 DATA_ROOT="${DATA_ROOT:-$PWD/MBDD2025_curated_v1}"
 MANIFEST_PATH="${MANIFEST_PATH:-$DATA_ROOT/split_manifest.csv}"
@@ -23,6 +24,7 @@ export TORCH_HOME="${TORCH_HOME:-$PWD/.torch_cache}"
 
 case "$MODEL" in fasterrcnn|retinanet) ;; *) echo "Invalid MODEL: $MODEL" >&2; exit 2 ;; esac
 case "$MODE" in smoke|train|test) ;; *) echo "Invalid MODE: $MODE" >&2; exit 2 ;; esac
+case "$AUGMENTATION" in none|standard) ;; *) echo "Invalid AUGMENTATION: $AUGMENTATION" >&2; exit 2 ;; esac
 [[ -x "$PYTHON_BIN" ]] || { echo "Missing environment: $PYTHON_BIN; run prepare_cetus.sh" >&2; exit 2; }
 [[ -d "$DATA_ROOT/JPEGImages" && -d "$DATA_ROOT/Annotations" && -f "$MANIFEST_PATH" ]] || {
   echo "Curated dataset or manifest missing under $DATA_ROOT" >&2; exit 2;
@@ -34,7 +36,7 @@ if [[ "$MODE" == test && ! -f "$OUT/best.pt" ]]; then
   echo "Selected checkpoint absent: $OUT/best.pt" >&2; exit 2
 fi
 
-echo "START $(date -Is) job=${PBS_JOBID:-unknown} host=$(hostname) mode=$MODE model=$MODEL run=$RUN_NAME"
+echo "START $(date -Is) job=${PBS_JOBID:-unknown} host=$(hostname) mode=$MODE model=$MODEL run=$RUN_NAME aug=$AUGMENTATION"
 echo "PBS resource request: ${PBS_RESOURCE_LIST:-see qstat -fx $PBS_JOBID}"
 "$PYTHON_BIN" -c 'import torch, torchvision, pycocotools; assert torch.cuda.is_available(), "CUDA unavailable"; print("GPU:", torch.cuda.get_device_name(0), "VRAM GiB:", round(torch.cuda.get_device_properties(0).total_memory/1024**3,2), "torch:", torch.__version__, "torchvision:", torchvision.__version__, flush=True)'
 
@@ -78,7 +80,8 @@ case "$MODE" in
       --epochs "${EPOCHS:-100}" --eval-every "${EVAL_EVERY:-5}"
       --batch-size "${BATCH_SIZE:-1}" --workers "${WORKERS:-2}"
       --seed "$SEED" --checkpoint-every-minutes "${CHECKPOINT_MINUTES:-15}"
-      --checkpoint-every-batches "${CHECKPOINT_BATCHES:-1000}")
+      --checkpoint-every-batches "${CHECKPOINT_BATCHES:-1000}"
+      --augmentation "$AUGMENTATION")
     if [[ -f "$OUT/last.pt" ]]; then
       echo "Resuming $OUT/last.pt"
       command+=(--resume "$OUT/last.pt")

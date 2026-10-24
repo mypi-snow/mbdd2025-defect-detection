@@ -1,0 +1,30 @@
+
+=== 2026-10-20 11:36:21 python -u train_detector.py --model retinanet --data-root MBDD2025_curated_v1 --manifest MBDD2025_curated_v1\split_manifest.csv --output runs\retinanet_local_base\test_eval --eval-only --split test --checkpoint runs\retinanet_local_base\best.pt --image-size 640 --workers 6 ===
+<site-packages>\torchvision\models\detection\backbone_utils.py:162: UserWarning: Changing trainable_backbone_layers has no effect if neither pretrained nor pretrained_backbone have been set to True, falling back to trainable_backbone_layers=5 so that all layers are trainable
+  warnings.warn(
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=11.48s).
+Accumulating evaluation results...
+DONE (t=2.55s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.067
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.170
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.031
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.001
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.082
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.073
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.080
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.150
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.185
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.014
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.149
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.243
+{
+  "split": "test",
+  "mAP50": 0.16987025107280326,
+  "mAP50_95": 0.06651308571685154
+}
